@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const sequelize = require("./config/database");
@@ -10,7 +11,10 @@ app.use(express.json());
 const artisanRoutes = require("./routes/artisan.routes");
 app.use("/api/artisans", artisanRoutes);
 
+const PORT = process.env.PORT || 3000;
+
 sequelize.sync().then(() => {
   console.log("DB connected");
-  app.listen(3000, () => console.log("Server running on port 3000"));
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 });
+
